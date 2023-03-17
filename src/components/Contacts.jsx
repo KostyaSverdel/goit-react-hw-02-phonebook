@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 
-export const ContactForm = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-
-  const handleChange = event => {
-    setName(event.target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    onSubmit({ id: nanoid(), name });
-    setName('');
-  };
-
+export const ContactForm = ({
+  name,
+  number,
+  onNameChange,
+  onNumberChange,
+  onSubmit,
+}) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <label>
         Name
         <input
@@ -25,7 +19,19 @@ export const ContactForm = ({ onSubmit }) => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={name}
-          onChange={handleChange}
+          onChange={onNameChange}
+        />
+      </label>
+      <label>
+        Phone
+        <input
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+          value={number}
+          onChange={onNumberChange}
         />
       </label>
       <button type="submit">Add contact</button>
@@ -33,11 +39,16 @@ export const ContactForm = ({ onSubmit }) => {
   );
 };
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ul>
-      {contacts.map(({ id, name }) => (
-        <li key={id}>{name}</li>
+      {contacts.map(({ id, name, number }) => (
+        <li key={id}>
+          {name} ({number})
+          <button type="button" onClick={() => onDeleteContact(id)}>
+            Delete
+          </button>
+        </li>
       ))}
     </ul>
   );
