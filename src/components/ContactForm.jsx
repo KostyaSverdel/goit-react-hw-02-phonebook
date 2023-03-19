@@ -1,5 +1,5 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 export const ContactForm = ({
   name,
@@ -39,17 +39,10 @@ export const ContactForm = ({
   );
 };
 
-export const ContactList = ({ contacts, onDeleteContact }) => {
-  return (
-    <ul>
-      {contacts.map(({ id, name, number }) => (
-        <li key={id}>
-          {name} ({number})
-          <button type="button" onClick={() => onDeleteContact(id)}>
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
-  );
+ContactForm.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  onNameChange: PropTypes.func.isRequired,
+  onNumberChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
