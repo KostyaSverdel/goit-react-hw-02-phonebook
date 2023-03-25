@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from '../Filter/Filter.module.css';
 
-export const Filter = ({ onFilterChange, filter }) => {
-  return (
-    <div className={css.FilterConteiner}>
-      <label className={css.FilterLabel}>
-        Find contacts by name
-        <input
-          className={css.FilterInputs}
-          type="text"
-          onChange={onFilterChange}
-          value={filter}
-        />
-      </label>
-    </div>
-  );
-};
+const Filter = ({ value, onChange }) => (
+  <div className={css.FilterConteiner}>
+    <label className={css.FilterLabel}>
+      Find contacts by name
+      <input
+        className={css.FilterInputs}
+        type="text"
+        value={value}
+        onChange={onChange}
+      />
+    </label>
+  </div>
+);
 
 Filter.propTypes = {
-  onFilterChange: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
+
+export default Filter;
