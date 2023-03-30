@@ -26,6 +26,7 @@ class App extends React.Component {
 
     if (isNameExist) {
       alert(`${name} is already in contacts`);
+      this.nameInput.current.focus();
       return;
     }
 
@@ -53,7 +54,7 @@ class App extends React.Component {
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
-        <Filter filter={filter} onFilterChange={this.handleFilterChange} />
+        <Filter filter={filter} onChange={this.handleFilterChange} />
         <ContactList
           contacts={filteredContacts}
           onDeleteContact={this.deleteContact}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import css from '../ContactForm/ContactForm.module.css';
 
 class ContactForm extends React.Component {
+  nameInput = React.createRef();
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
   };
